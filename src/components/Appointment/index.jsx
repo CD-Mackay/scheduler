@@ -16,6 +16,7 @@ const CREATE = "FORM";
 const SAVING = 'SAVING';
 const DELETING = 'DELETING';
 const CONFIRM = 'CONFIRM';
+const EDIT = 'EDIT';
 
 export default function Appointment(props) {
   
@@ -64,10 +65,20 @@ function remove(name, interviewer) {
       bookInterview={props.bookInterview}
       cancelInterview={props.cancelInterview}
       onDelete={() => transition(CONFIRM)}
+      onEdit={() => transition(EDIT)}
       />)}
       {mode === CREATE && 
       <Form 
       onCancel={back}
+      interviewers={props.interviewers}
+      onSave={save}
+      bookInterview={props.bookInterview}
+      />} 
+        {mode === EDIT && 
+      <Form 
+      onCancel={back}
+      name={props.interview.student}
+      interviewer={props.interview.interviewer.id}
       interviewers={props.interviewers}
       onSave={save}
       bookInterview={props.bookInterview}
