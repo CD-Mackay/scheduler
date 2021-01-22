@@ -10,7 +10,7 @@ export default function useVisualMode(inputMode){
   function transition(input, replace = false) {
     if(replace) {
       setMode(input);
-      setHistory([...history.slice(0, -1), input]);
+      setHistory(prevHistory => [...prevHistory.slice(0, -1), input]);
     } else {
     setMode(input);
     setHistory(prevHistory => [...prevHistory, input]);

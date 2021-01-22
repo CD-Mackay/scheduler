@@ -5,9 +5,7 @@ import { create } from 'react-test-renderer';
 export default function Empty(props) {
 
   const { mode, transition, back } = useVisualMode();
-  const EMPTY = "EMPTY";
-  const SHOW = "SHOW";
-  const CREATE = "FORM";
+
 
   return (
     <main className="appointment__add" >

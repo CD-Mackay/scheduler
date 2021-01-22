@@ -55,9 +55,7 @@ function bookInterview(id, interview) {
     console.log("Appointment!: ", appointments);
     setState({...state, appointments});
   })
-  .catch((err) => {
-    console.log(err);
-  }) 
+  
   
 };
 
@@ -81,9 +79,7 @@ console.log('clicked')
     console.log('cancelled', response);
     setState({...state, appointments});
 })
-.catch((err) => {
-  console.log(err);
-}) 
+
   
 }
 
