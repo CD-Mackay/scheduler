@@ -38,7 +38,6 @@ useEffect(() => {
 const dailyInterviewers = getInterviewersForDay(state, state.day);
 
 function bookInterview(id, interview) {
-  console.log("BOOK INTERVIEW ", id, interview);
 
   const appointment = {
     ...state.appointments[id],
@@ -50,7 +49,7 @@ function bookInterview(id, interview) {
     [id]: appointment
   };
 
-  return axios.put(`/api/appointments/${id}`, { interview } )
+  return axios.put(`/api/appointments/${appointment.id}`, appointment )
   .then((response) => {
     console.log(response);
     console.log("Appointment!: ", appointments);
@@ -59,10 +58,34 @@ function bookInterview(id, interview) {
   .catch((err) => {
     console.log(err);
   }) 
-
-  
   
 };
+
+function cancelInterview(id, interview) {
+console.log('clicked')
+  const appointment = {
+    ...state.appointments[id],
+    interview: {...interview}
+  };
+
+
+
+  const appointments = {
+    ...state.appointments,
+    [id]: appointment
+  };
+
+
+ return axios.delete(`/api/appointments/${appointment.id}`, appointment )
+  .then((response) => {
+    console.log('cancelled', response);
+    setState({...state, appointments});
+})
+.catch((err) => {
+  console.log(err);
+}) 
+  
+}
 
 const dailyAppointments = getAppointmentsForDay(state, state.day);
 
@@ -75,6 +98,7 @@ const parsedAppointments = dailyAppointments.map(appointment => {
           interview={interview}
           interviewers={dailyInterviewers}
           bookInterview={bookInterview}
+          cancelInterview={cancelInterview}
          />
 });
 
