@@ -1,8 +1,66 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import "components/Application.scss";
+import DayList from 'components/DayList.jsx';
+import Appointment from "components/Appointment";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from 'helpers/selectors';
+
+
+
 
 export default function Application(props) {
+ const [state, setState] = useState({
+   day: "Monday",
+   days: [],
+   appointments: {}
+ });
+
+ 
+
+//  const setDays = (days) => setState({...state, days})
+ const setDay = day => setState({...state, day})
+
+useEffect(() => {
+
+  Promise.all([
+    axios.get('/api/days'),
+    axios.get('api/appointments'),
+    axios.get('/api/interviewers')
+  ])
+  .then((all) => {
+    console.log("API DAYS! ", all[0].data);
+    console.log("API APPTS! ", all[1].data)
+    setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}))
+  })
+  .catch(err => {
+    console.log(err);
+  })
+
+}, [])
+const dailyInterviewers = getInterviewersForDay(state, state.day);
+
+// const parsedInterviewers = dailyInterviewers.map(interviewer => {
+//   return <Appointment
+//           key={interviewer.id}
+//           interviewers={dailyInterviewers}
+//           />
+// })
+console.log("INTERVIEWERS!", dailyInterviewers);
+const dailyAppointments = getAppointmentsForDay(state, state.day);
+
+const parsedAppointments = dailyAppointments.map(appointment => {
+  const interview = getInterview(state, appointment.interview);
+  return <Appointment 
+          key={appointment.id} 
+          id={appointment.id}
+          time={appointment.time}
+          interview={interview}
+          interviewers={dailyInterviewers}
+         />
+});
+
+
+
   return (
     <main className="layout">
       <section className="sidebar">
@@ -12,7 +70,9 @@ export default function Application(props) {
   alt="Interview Scheduler"
 />
 <hr className="sidebar__separator sidebar--centered" />
-<nav className="sidebar__menu"></nav>
+<nav className="sidebar__menu">
+  <DayList days={state.days} day={state.day} setDay={setDay} />
+</nav>
 <img
   className="sidebar__lhl sidebar--centered"
   src="images/lhl.png"
@@ -20,7 +80,8 @@ export default function Application(props) {
 />
       </section>
       <section className="schedule">
-        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
+        { parsedAppointments }
+        <Appointment key="last" time="5pm" interviewers={dailyInterviewers} />
       </section>
     </main>
   );
