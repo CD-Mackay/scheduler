@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import Header from 'components/Appointment/Header.jsx';
+import Status from 'components/Appointment/Status.jsx';
 import Show from 'components/Appointment/Show.jsx';
 import Empty from 'components/Appointment/Empty.jsx';
 import Form from 'components/Appointment/Form.jsx';
@@ -11,6 +12,7 @@ import useVisualMode from 'hooks/useVisualMode.js';
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "FORM";
+const SAVING = 'SAVING';
 
 export default function Appointment(props) {
   
@@ -19,6 +21,7 @@ const { mode, transition, back, history } = useVisualMode(
 );
 
 function save(name, interviewer) {
+  transition(SAVING);
   const interview = {
     student: name,
     interviewer
@@ -27,6 +30,9 @@ function save(name, interviewer) {
   console.log("interview obj", interview);
 
   props.bookInterview(props.id, interview)
+  .then((response) => {
+    transition(SHOW);
+  })
  
 
  
@@ -59,7 +65,8 @@ function save(name, interviewer) {
       history={history}
       onSave={save}
       bookInterview={props.bookInterview}
-      />}     
+      />} 
+      {mode === SAVING && <Status message={'saving'} />}    
        </article>
   )
 }

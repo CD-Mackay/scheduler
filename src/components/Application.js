@@ -23,7 +23,7 @@ useEffect(() => {
 
   Promise.all([
     axios.get('/api/days'),
-    axios.get('api/appointments'),
+    axios.get('/api/appointments'),
     axios.get('/api/interviewers')
   ])
   .then((all) => {
@@ -36,7 +36,7 @@ useEffect(() => {
 
 }, [])
 const dailyInterviewers = getInterviewersForDay(state, state.day);
-///////
+
 function bookInterview(id, interview) {
   console.log("BOOK INTERVIEW ", id, interview);
 
@@ -50,21 +50,20 @@ function bookInterview(id, interview) {
     [id]: appointment
   };
 
-  axios.put(`api/appointment/${id}`, interview )
-  .then((req, response) => {
-    console.log(req);
+  return axios.put(`/api/appointments/${id}`, { interview } )
+  .then((response) => {
     console.log(response);
     console.log("Appointment!: ", appointments);
     setState({...state, appointments});
-    return new Promise();
   })
   .catch((err) => {
     console.log(err);
   }) 
+
   
   
 };
-//////
+
 const dailyAppointments = getAppointmentsForDay(state, state.day);
 
 const parsedAppointments = dailyAppointments.map(appointment => {
