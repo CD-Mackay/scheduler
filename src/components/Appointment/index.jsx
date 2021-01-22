@@ -1,4 +1,4 @@
-import React, { Fragment }from 'react';
+import React, { Fragment } from 'react';
 import Header from 'components/Appointment/Header.jsx';
 import Show from 'components/Appointment/Show.jsx';
 import Empty from 'components/Appointment/Empty.jsx';
@@ -18,6 +18,25 @@ const { mode, transition, back, history } = useVisualMode(
   props.interview ? SHOW : EMPTY
 );
 
+function save(name, interviewer) {
+  const interview = {
+    student: name,
+    interviewer
+  };
+
+  console.log("interview obj", interview);
+
+  props.bookInterview(props.id, interview)
+ 
+
+ 
+
+
+  return interview;
+};
+
+
+
 
 
   return (
@@ -28,14 +47,18 @@ const { mode, transition, back, history } = useVisualMode(
       <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && (
       <Show
-      student={props.interview.student}
-      interviewer={props.interview.interviewer}
+      interview={props.interview}
+      student={props.student}
+      interviewer={props.interviewer}
+      bookInterview={props.bookInterview}
       />)}
       {mode === CREATE && 
       <Form 
       onCancel={back}
       interviewers={props.interviewers}
       history={history}
+      onSave={save}
+      bookInterview={props.bookInterview}
       />}     
        </article>
   )

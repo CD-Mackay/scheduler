@@ -28,9 +28,10 @@ export default function Form (props) {
   }
 
   const saveForm = function() {
-    // setName(props.name);
-    // setInterviewer(props.interviewer);
-    props.onSave(name, interviewer);
+    setName(props.name);
+    setInterviewer(props.interviewer);
+    props.onSave(name, interviewer)
+    
   }
 
   return (

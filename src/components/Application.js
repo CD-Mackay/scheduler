@@ -3,9 +3,8 @@ import axios from 'axios';
 import "components/Application.scss";
 import DayList from 'components/DayList.jsx';
 import Appointment from "components/Appointment";
+
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from 'helpers/selectors';
-
-
 
 
 export default function Application(props) {
@@ -28,8 +27,7 @@ useEffect(() => {
     axios.get('/api/interviewers')
   ])
   .then((all) => {
-    console.log("API DAYS! ", all[0].data);
-    console.log("API APPTS! ", all[1].data)
+
     setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}))
   })
   .catch(err => {
@@ -38,14 +36,35 @@ useEffect(() => {
 
 }, [])
 const dailyInterviewers = getInterviewersForDay(state, state.day);
+///////
+function bookInterview(id, interview) {
+  console.log("BOOK INTERVIEW ", id, interview);
 
-// const parsedInterviewers = dailyInterviewers.map(interviewer => {
-//   return <Appointment
-//           key={interviewer.id}
-//           interviewers={dailyInterviewers}
-//           />
-// })
-console.log("INTERVIEWERS!", dailyInterviewers);
+  const appointment = {
+    ...state.appointments[id],
+    interview: { ...interview }
+  };
+
+  const appointments = {
+    ...state.appointments,
+    [id]: appointment
+  };
+
+  axios.put(`api/appointment/${id}`, interview )
+  .then((req, response) => {
+    console.log(req);
+    console.log(response);
+    console.log("Appointment!: ", appointments);
+    setState({...state, appointments});
+    return new Promise();
+  })
+  .catch((err) => {
+    console.log(err);
+  }) 
+  
+  
+};
+//////
 const dailyAppointments = getAppointmentsForDay(state, state.day);
 
 const parsedAppointments = dailyAppointments.map(appointment => {
@@ -56,6 +75,7 @@ const parsedAppointments = dailyAppointments.map(appointment => {
           time={appointment.time}
           interview={interview}
           interviewers={dailyInterviewers}
+          bookInterview={bookInterview}
          />
 });
 
@@ -81,7 +101,7 @@ const parsedAppointments = dailyAppointments.map(appointment => {
       </section>
       <section className="schedule">
         { parsedAppointments }
-        <Appointment key="last" time="5pm" interviewers={dailyInterviewers} />
+        <Appointment key="last" time="5pm" interviewers={dailyInterviewers} bookInterview={bookInterview} />
       </section>
     </main>
   );
