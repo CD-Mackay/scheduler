@@ -13,7 +13,8 @@ export default function Application(props) {
    state, 
    setDay,
    bookInterview,
-   cancelInterview
+   cancelInterview,
+   setSpots
  } = useApplicationData();
 
  
@@ -21,7 +22,9 @@ export default function Application(props) {
 
 const dailyInterviewers = getInterviewersForDay(state, state.day);
 
+
 const dailyAppointments = getAppointmentsForDay(state, state.day);
+
 
 const parsedAppointments = dailyAppointments.map(appointment => {
   const interview = getInterview(state, appointment.interview);
@@ -48,7 +51,7 @@ const parsedAppointments = dailyAppointments.map(appointment => {
 />
 <hr className="sidebar__separator sidebar--centered" />
 <nav className="sidebar__menu">
-  <DayList days={state.days} day={state.day} setDay={setDay} />
+  <DayList days={state.days} day={state.day} setDay={setDay}  />
 </nav>
 <img
   className="sidebar__lhl sidebar--centered"

@@ -43,7 +43,6 @@ function save(name, interviewer) {
 };
 
 function remove(name, interviewer) {
-  console.log("name and interviewer", name, interviewer);
   const interview = null
   transition(DELETING, true);
   props.cancelInterview(props.id, interview)

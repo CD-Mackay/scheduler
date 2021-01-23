@@ -4,6 +4,8 @@ import 'components/DayListItem.scss';
 import classnames from 'classnames';
 
 export default function DayList(props) {
+  
+
 const  DayListData  = props;
 let ParsedDayList = [];
 
