@@ -55,10 +55,8 @@ export default function useApplicationData() {
       const days = state.days.map(day => {
         if (state.day === day.name) {
           day.spots = spotsRemaining(state.day, state.days, appointments);
+        } 
           return day;
-        } else {
-          return day;
-        }
       })
 
      return axios.delete(`/api/appointments/${appointment.id}`)
@@ -81,10 +79,9 @@ export default function useApplicationData() {
       const days = state.days.map(day => {
         if (state.day === day.name) {
           day.spots = spotsRemaining(state.day, state.days, appointments);
-          return day;
-        } else {
-          return day;
         }
+          return day;
+        
       })
       return axios.put(`/api/appointments/${appointment.id}`, appointment )
       .then((response) => {
