@@ -40,7 +40,7 @@ export default function useApplicationData() {
      }
    })
    return 5 - bookedAppointments;
- }
+ };
 
   function cancelInterview(id, interview) {
       const appointment = {
