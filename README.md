@@ -23,7 +23,6 @@ npm test
 npm run storybook
 ```
 
-!["Application Homepage"]()
-!["Error Handling"]()
-!["Automatically updates remaining spots"]()
+!["Application Homepage"](https://github.com/CD-Mackay/scheduler/blob/master/docs/Homepage.png)
+!["Error Handling"](https://github.com/CD-Mackay/scheduler/blob/master/docs/Errorhandling.png)
 
