@@ -30,12 +30,16 @@ describe("Appointments", () => {
     cy.contains(".appointment__card--show", "Tori Malcolm");
   })
   it("Should cancel an interview", () => {
+    
     cy.get("[alt=Delete]")
     .first()
     .click({force: true});
     cy.get('.appointment__actions > :nth-child(2)') 
        .click();
-       cy.get('.day-list__item--selected > .text--light').contains("5 spots remaining");
-       cy.get("Archie Cohen").should('not.exist');
+       cy.contains("deleting").should("exist");
+       cy.contains("deleting").should("not.exist");
+    cy.get('.day-list__item--selected > .text--light').contains("5 spots remaining");
+    cy.get("Archie Cohen").should('not.exist');
   })
+  
 })
