@@ -1,4 +1,5 @@
 # Interview Scheduler
+A student project made using ReactJs. Project database is hosted on Heroku and deployed through Netlify. All modifications to the master branch are automatically tested and pushed to production using CircleCI. 
 
 ## Setup
 
@@ -21,3 +22,8 @@ npm test
 ```sh
 npm run storybook
 ```
+
+!["Application Homepage"]()
+!["Error Handling"]()
+!["Automatically updates remaining spots"]()
+

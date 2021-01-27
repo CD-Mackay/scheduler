@@ -10,7 +10,13 @@ let ParsedDayList = [];
 
 if (Array.isArray(DayListData.days)) {
   ParsedDayList = DayListData.days.map(day => 
-  <DayListItem key={day.id} name={day.name} spots={day.spots} selected={day.name === props.day} setDay={props.setDay} />)
+    <DayListItem 
+    key={day.id} 
+    name={day.name} 
+    spots={day.spots} 
+    selected={day.name === props.day} 
+    setDay={props.setDay} 
+    />)
 }
 
   return (
