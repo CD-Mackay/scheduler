@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function useVisualMode(inputMode){
 
@@ -18,7 +18,7 @@ export default function useVisualMode(inputMode){
   }
 
   function back(){
-    let previousMode = history.pop();
+    history.pop();
     if (history.length >= 1) {
     setMode(history[history.length - 1]);
     }

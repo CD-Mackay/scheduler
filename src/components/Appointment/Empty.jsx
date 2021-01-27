@@ -1,10 +1,7 @@
 import React from 'react';
-import useVisualMode from 'hooks/useVisualMode.js';
-import { create } from 'react-test-renderer';
 
 export default function Empty(props) {
 
-  const { mode, transition, back } = useVisualMode();
 
 
   return (

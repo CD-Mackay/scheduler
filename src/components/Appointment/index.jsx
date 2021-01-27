@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Header from 'components/Appointment/Header.jsx';
 import Status from 'components/Appointment/Status.jsx';
 import Show from 'components/Appointment/Show.jsx';

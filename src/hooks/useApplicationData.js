@@ -1,7 +1,6 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { getAppointmentsForDay } from 'helpers/selectors';
-import { template } from '@babel/core';
+import { useState, useEffect } from 'react';
+
 export default function useApplicationData() {
 
 

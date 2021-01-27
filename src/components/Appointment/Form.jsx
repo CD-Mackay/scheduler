@@ -7,16 +7,13 @@ import useVisualMode from 'hooks/useVisualMode.js';
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
-const CREATE = "FORM";
 
 export default function Form (props) {
  
   const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
-  const { mode, transition, back } = useVisualMode(
-    props.interview? SHOW : EMPTY
-  );
+  useVisualMode(props.interview? SHOW : EMPTY);
 
   const reset = function() {
     setName("");
