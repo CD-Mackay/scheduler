@@ -80,7 +80,7 @@ export default function useApplicationData() {
         if (state.day === day.name) {
           day.spots = spotsRemaining(state.day, state.days, appointments);
         }
-          return day;
+         // return day;
         
       })
       return axios.put(`/api/appointments/${appointment.id}`, appointment )
