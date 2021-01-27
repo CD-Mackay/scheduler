@@ -6,7 +6,7 @@ describe("Appointments", () => {
     cy.visit('/');
     cy.contains("Monday");
   });
-
+// Deploy!
 
   it("Should book an interview", () => {
     cy.get("[alt=Add]")
