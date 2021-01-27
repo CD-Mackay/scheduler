@@ -1,0 +1,11 @@
+== Info:   Trying 127.0.0.1...
+== Info: TCP_NODELAY set
+== Info: Connected to localhost (127.0.0.1) port 3001 (#0)
+=> Send header, 93 bytes (0x5d)
+0000: GET /api/debug/reset HTTP/1.1
+001f: Host: localhost:3001
+0035: User-Agent: curl/7.64.1
+004e: Accept: */*
+005b: 
+== Info: Recv failure: Connection reset by peer
+== Info: Closing connection 0
